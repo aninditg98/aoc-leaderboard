@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
     "noEmit": true,
-    "baseUrl": "./src",
+    "outDir": "build",
+    "strict": true,
     "module": "ES6",
     "moduleResolution": "node",
+    "importHelpers": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "resolveJsonModule": true,

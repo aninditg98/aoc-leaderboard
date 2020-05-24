@@ -5,7 +5,7 @@ module.exports = {
     main: './app/index.tsx',
   },
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].[hash].bundle.js',
     path: path.resolve('build'),
   },
   resolve: {

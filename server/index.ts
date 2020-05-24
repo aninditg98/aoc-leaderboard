@@ -1,11 +1,14 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
+import helmet from 'helmet';
+import api from './api';
 
 const app = express();
-
+// Set various headers for protection
+app.use(helmet());
 app.use(bodyParser.json());
-
+// Allow cross-domain requests
 app.use((_req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
@@ -15,9 +18,7 @@ app.use((_req, res, next) => {
   next();
 });
 
-app.get('/healthcheck', (req, res: express.Response) => {
-  res.send('OK');
-});
+app.use('/api', api);
 
 if (process.env.NODE_ENV === 'production') {
   // Serve production assets
