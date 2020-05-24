@@ -1,0 +1,53 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": ["eslint:recommended", "eslint-config-prettier"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2019,
+    "sourceType": "module" // Allows for the use of imports
+  },
+  "plugins": ["@typescript-eslint/eslint-plugin"], // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin
+  "ignorePatterns": ["dist/", "build"],
+  "rules": {
+    "strict": ["error", "never"]
+  },
+  "settings": {
+    "react": {
+      "version": "detect" // Tells eslint-plugin-react to automatically detect the version of React to use
+    }
+  },
+  "parser": "@typescript-eslint/parser", // Specifies the ESLint parser
+  "overrides": [
+    {
+      "files": "**/*.+(ts)", // this override enables ESLint Support for TypeScript Files
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      },
+      "extends": [
+        "plugin:@typescript-eslint/eslint-recommended", // Disables some rules that are not necessary when using TypeScript
+        "plugin:@typescript-eslint/recommended", // Set of rules which are recommended for all projects by the ESLint Team
+        "eslint-config-prettier/@typescript-eslint" // Override/Disable the rules from "typescript-eslint" that are not necessary because prettier is handling them
+      ]
+    },
+    {
+      "files": ["**/app/**"],
+      "extends": [
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier/@typescript-eslint",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        "react/prop-types": "warn"
+      }
+    }
+  ]
+}
