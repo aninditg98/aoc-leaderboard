@@ -7,7 +7,7 @@
     "start": "NODE_ENV=production node build/index.js",
     "server": "npm run validate && nodemon build/index.js",
     "client": "webpack-dev-server --open --config webpack.dev.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "npm run clean && concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=true npm run build",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx,.jsx .",
     "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|json|jsx|ts|tsx)\"",
@@ -18,7 +18,8 @@
     "build:client": "webpack --config webpack.prod.js",
     "build:server": "babel server --extensions .js,.ts,.tsx --out-dir build",
     "build": "npm run build:server && npm run build:client",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf build"
   },
   "repository": {
     "type": "git",
