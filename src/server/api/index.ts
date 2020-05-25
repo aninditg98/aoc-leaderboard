@@ -5,7 +5,7 @@ const apiRouter = express.Router();
 
 // server healthcheck route
 apiRouter.get('/healthcheck', (req, res: express.Response) => {
-  res.send('OK');
+	res.send('OK');
 });
 
 apiRouter.use('/dummyApi', dummyApi);

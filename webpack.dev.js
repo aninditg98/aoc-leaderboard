@@ -5,33 +5,33 @@ const common = require('./webpack.common.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = merge(common, {
-  mode: 'development',
-  devtool: 'inline-source-map',
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: '[APP NAME]',
-      meta: [
-        // viewport meta tag for responsiveness / media queries
-        {
-          name: 'viewport',
-          content: 'width=device-width, initial-scale=1',
-        },
-      ],
-      template: require('html-webpack-template'),
-      favicon: './app/public/favicon.ico',
-      appMountId: 'root',
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-  ],
-  devServer: {
-    hot: true, // enable hot reloading
-    overlay: true, // error overlay
-    historyApiFallback: {
-      disableDotRule: true,
-    },
-    proxy: {
-      '/api': 'http://localhost:3030',
-    },
-    contentBase: path.join(__dirname, './build'),
-  },
+	mode: 'development',
+	devtool: 'inline-source-map',
+	plugins: [
+		new HtmlWebpackPlugin({
+			title: '[APP NAME]',
+			meta: [
+				// viewport meta tag for responsiveness / media queries
+				{
+					name: 'viewport',
+					content: 'width=device-width, initial-scale=1',
+				},
+			],
+			template: require('html-webpack-template'),
+			favicon: './src/public/favicon.ico',
+			appMountId: 'root',
+		}),
+		new webpack.HotModuleReplacementPlugin(),
+	],
+	devServer: {
+		hot: true, // enable hot reloading
+		overlay: true, // error overlay
+		historyApiFallback: {
+			disableDotRule: true,
+		},
+		proxy: {
+			'/api': 'http://localhost:3030',
+		},
+		contentBase: path.join(__dirname, './build'),
+	},
 });

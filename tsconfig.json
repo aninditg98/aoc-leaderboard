@@ -1,16 +1,16 @@
 {
-  "compilerOptions": {
-    "noEmit": true,
-    "outDir": "build",
-    "strict": true,
-    "module": "ES6",
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "allowSyntheticDefaultImports": true,
-    "declaration": true,
-    "resolveJsonModule": true,
-    "sourceMap": true,
-    "jsx": "react",
-    "esModuleInterop": true
-  }
+	"compilerOptions": {
+		"noEmit": true,
+		"outDir": "build",
+		"strict": true,
+		"module": "ES6",
+		"moduleResolution": "node",
+		"importHelpers": true,
+		"allowSyntheticDefaultImports": true,
+		"declaration": true,
+		"resolveJsonModule": true,
+		"sourceMap": true,
+		"jsx": "react",
+		"esModuleInterop": true
+	}
 }
