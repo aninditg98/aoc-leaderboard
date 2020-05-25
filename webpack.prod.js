@@ -7,8 +7,16 @@ module.exports = merge(common, {
   mode: 'production',
   plugins: [
     new HtmlWebpackPlugin({
+      filename: 'generated.html',
       title: '[APP NAME]',
-      template: './app/public/index.html',
+      meta: [
+        // viewport meta tag for responsiveness / media queries
+        {
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1',
+        },
+      ],
+      template: require('html-webpack-template'),
       favicon: './app/public/favicon.ico',
       appMountId: 'root',
       minify: {

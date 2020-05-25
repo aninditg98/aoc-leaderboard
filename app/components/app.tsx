@@ -1,19 +1,16 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
+import { hot } from 'react-hot-loader';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import { DemoContainer } from './Demo';
 
-const headerStyle: CSSProperties = {
-  color: '#4793e0',
-  textAlign: 'center',
-  margin: '25px 0 25px 0',
-  textShadow:
-    '-1px 0 #22242638, 0 1px #22242638, 1px 0 #22242638, 0 -1px #22242638',
-};
-
-const App = (): JSX.Element => {
+const App: React.FunctionComponent = () => {
   return (
-    <div>
-      <h1 style={headerStyle}>React Starter</h1>
-    </div>
+    <Switch>
+      <Route exact path="/demo" component={DemoContainer} />
+      {/* Redirect insures we always have something sensible to render */}
+      <Redirect to="/demo" />
+    </Switch>
   );
 };
 
-export default App;
+export default hot(module)(App);

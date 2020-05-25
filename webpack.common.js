@@ -5,6 +5,9 @@ module.exports = {
     main: './app/index.tsx',
   },
   output: {
+    // publicPath specifies the public URL of the output directory when referenced in a browser
+    // Without this, webpack dev server could not locate the bundles when loading the app on a nested entrypoint
+    publicPath: '/',
     filename: '[name].[hash].bundle.js',
     path: path.resolve('build'),
   },

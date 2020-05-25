@@ -23,9 +23,9 @@ app.use('/api', api);
 if (process.env.NODE_ENV === 'production') {
   // Serve production assets
   app.use(express.static('build'));
-
-  app.get('*', (_req, res) => {
-    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+  console.log(__dirname);
+  app.get('/*', (_req, res) => {
+    res.sendFile(path.resolve(__dirname, 'generated.html'));
   });
 }
 
