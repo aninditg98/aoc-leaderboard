@@ -17,7 +17,7 @@ module.exports = merge(common, {
 				},
 			],
 			template: require('html-webpack-template'),
-			favicon: './app/public/favicon.ico',
+			favicon: './src/public/favicon.ico',
 			appMountId: 'root',
 			minify: {
 				removeComments: true,

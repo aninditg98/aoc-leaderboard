@@ -9,7 +9,7 @@ module.exports = {
 		// Without this, webpack dev server could not locate the bundles when loading the app on a nested entrypoint
 		publicPath: '/',
 		filename: '[name].[hash].bundle.js',
-		path: path.resolve('build'),
+		path: path.join(__dirname, 'dist'),
 	},
 	resolve: {
 		modules: ['node_modules', path.join(__dirname, 'src'), 'shared'],
