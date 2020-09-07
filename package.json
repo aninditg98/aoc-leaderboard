@@ -5,9 +5,9 @@
 	"main": "build/server/index.js",
 	"scripts": {
 		"start": "NODE_ENV=production node build/server/index.js",
-		"server": "npm run validate && npm run build:server && nodemon build/index.js",
-		"client": "webpack-dev-server --open --config webpack.dev.js",
-		"dev": "npm run clean && concurrently \"npm run server\" \"npm run client\"",
+		"server:dev": "npm run validate && npm run build:dev-server && nodemon build/index.js",
+		"client:dev": "webpack-dev-server --open --config webpack.dev.js",
+		"dev": "npm run clean:dev && concurrently \"npm run server:dev\" \"npm run client:dev\"",
 		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=true npm run build",
 		"lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx,.jsx .",
 		"prettier": "prettier --ignore-path .gitignore \"**/*.+(js|json|jsx|ts|tsx)\"",
@@ -17,9 +17,11 @@
 		"validate": "npm-run-all --parallel check-types check-format lint",
 		"build:client": "webpack --config webpack.prod.js",
 		"build:server": "babel src --extensions .js,.ts,.tsx --out-dir build",
+		"build:dev-server": "babel src --extensions .js,.ts,.tsx --out-dir build --source-maps",
 		"build": "npm run build:server && npm run build:client",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"clean": "rimraf build"
+		"clean": "rimraf build && rimraf dist",
+		"clean:dev": "rimraf build"
 	},
 	"repository": {
 		"type": "git",

@@ -14,7 +14,21 @@ module.exports = {
 	resolve: {
 		modules: ['node_modules', path.join(__dirname, 'src'), 'shared'],
 		// Add `.ts` and `.tsx` as a resolvable extension.
-		extensions: ['.ts', '.tsx', '.js', '.jsx'],
+		extensions: [
+			'.ts',
+			'.tsx',
+			'.js',
+			'.jsx',
+			'.css',
+			'ico',
+			'eot',
+			'ttf',
+			'woff',
+			'woff2',
+			'png',
+			'jpg',
+			'svg',
+		],
 	},
 	module: {
 		rules: [
@@ -43,9 +57,14 @@ module.exports = {
 				use: 'babel-loader',
 			},
 			{
-				test: /\.(eot|svg|ttf|woff|woff2|png|jpg)$/,
+				test: /\.(ico|eot|svg|ttf|woff|woff2|png|jpg)$/,
 				use: 'file-loader',
 			},
 		],
+	},
+	stats: {
+		chunks: true,
+		chunkModules: true,
+		colors: true,
 	},
 };
