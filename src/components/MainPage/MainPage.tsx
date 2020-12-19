@@ -8,7 +8,7 @@ const headerStyle: CSSProperties = {
 		'-1px 0 #22242638, 0 1px #22242638, 1px 0 #22242638, 0 -1px #22242638',
 };
 
-const DemoContainer: React.FunctionComponent = () => {
+const MainPage: React.FunctionComponent = () => {
 	return (
 		<div>
 			<h1 style={headerStyle}>React Starter</h1>
@@ -16,4 +16,4 @@ const DemoContainer: React.FunctionComponent = () => {
 	);
 };
 
-export default DemoContainer;
+export default MainPage;

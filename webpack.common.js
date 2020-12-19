@@ -33,24 +33,6 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.css$/,
-				exclude: /\.module\.css$/,
-				use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
-			},
-			{
-				test: /\.module\.css$/,
-				use: [
-					{ loader: 'style-loader' },
-					{
-						loader: 'css-loader',
-						options: {
-							modules: true,
-							localsConvention: 'camelCaseOnly',
-						},
-					},
-				],
-			},
-			{
 				// Include ts, tsx, js, and jsx files.
 				test: /\.(ts|js)x?$/,
 				exclude: /node_modules/,
