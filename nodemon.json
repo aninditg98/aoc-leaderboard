@@ -1,0 +1,6 @@
+{
+	"watch": ["src"],
+	"ext": "ts",
+	"ignore": ["src/test"],
+	"exec": "npm run build:dev-server && node build/server/index.js"
+}

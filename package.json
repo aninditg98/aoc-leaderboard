@@ -5,7 +5,7 @@
 	"main": "build/server/index.js",
 	"scripts": {
 		"start": "NODE_ENV=production node build/server/index.js",
-		"server:dev": "npm run validate && npm run build:dev-server && nodemon build/index.js",
+		"server:dev": "npm run validate && nodemon",
 		"client:dev": "webpack-dev-server --open --config webpack.dev.js",
 		"dev": "npm run clean:dev && concurrently \"npm run server:dev\" \"npm run client:dev\"",
 		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=true npm run build",
@@ -16,9 +16,9 @@
 		"check-types": "tsc",
 		"validate": "npm-run-all --parallel check-types check-format lint",
 		"build:client": "NODE_ENV=production webpack --config webpack.prod.js",
-		"build:server": "babel src --extensions .js,.ts,.tsx --out-dir build",
-		"build:dev-server": "babel src --extensions .js,.ts,.tsx --out-dir build --source-maps",
-		"build": "npm run build:server && npm run build:client",
+		"build:server": "babel src --extensions .js,.ts,.tsx --out-dir build --ignore src/components/**/*.tsx,src/renderers/*.tsx",
+		"build:dev-server": "npm run build:server -- --source-maps",
+		"build": "npm-run-all --parallel build:server build:client",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"clean": "rimraf build && rimraf dist",
 		"clean:dev": "rimraf build"
