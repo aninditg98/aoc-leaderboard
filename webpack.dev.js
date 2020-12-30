@@ -36,7 +36,9 @@ module.exports = merge(common, {
 			disableDotRule: true,
 		},
 		proxy: {
-			'/api': 'http://0.0.0.0::3030',
+			'/api': {
+				target: 'http://0.0.0.0:3030',
+			},
 		},
 		host: '0.0.0.0', //your ip address
 		port: 8080,

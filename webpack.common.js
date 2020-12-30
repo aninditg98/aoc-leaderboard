@@ -14,21 +14,7 @@ module.exports = {
 	resolve: {
 		modules: ['node_modules', path.join(__dirname, 'src'), 'shared'],
 		// Add `.ts` and `.tsx` as a resolvable extension.
-		extensions: [
-			'.ts',
-			'.tsx',
-			'.js',
-			'.jsx',
-			'.css',
-			'ico',
-			'eot',
-			'ttf',
-			'woff',
-			'woff2',
-			'png',
-			'jpg',
-			'svg',
-		],
+		extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', 'ico', 'eot', 'ttf', 'woff', 'woff2', 'png', 'jpg', 'svg'],
 	},
 	module: {
 		rules: [
