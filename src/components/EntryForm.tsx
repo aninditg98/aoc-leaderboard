@@ -58,7 +58,7 @@ function EntryForm() {
   }, [email, day, minutes, seconds]);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', fontFamily: 'Andale Mono' }}>
       <div
         style={{
           display: 'flex',

@@ -4,11 +4,11 @@ import axios from 'axios';
 import _ from 'lodash';
 
 const getBackgroundFromRank = (rank: number | undefined) => {
-  if (_.isNil(rank)) return '#fa8072';
-  if (rank > 2) return '#7ccd7c';
-  if (rank === 0) return '#FFD700';
-  if (rank === 1) return '#C0C0C0';
-  if (rank === 2) return '#CD7F32';
+  if (_.isNil(rank)) return '#ff2800';
+  if (rank > 2) return '#00ff00';
+  if (rank === 0) return '#ffcc00';
+  if (rank === 1) return '#d3d3d3';
+  if (rank === 2) return '#cc7722';
 };
 const DayPage: React.FunctionComponent = () => {
   const params = useParams<{ day: string }>();
@@ -37,7 +37,7 @@ const DayPage: React.FunctionComponent = () => {
     fetch();
   }, []);
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', fontFamily: 'Andale Mono' }}>
       <div
         style={{
           display: 'flex',
@@ -51,7 +51,7 @@ const DayPage: React.FunctionComponent = () => {
         }}
       >
         <b style={{ fontSize: 30 }}>
-          <u>Day 1</u>
+          <u>Day {params.day}</u>
         </b>
         <a href="/" style={{ fontSize: 20, color: 'blue', marginTop: 10 }}>
           Home
