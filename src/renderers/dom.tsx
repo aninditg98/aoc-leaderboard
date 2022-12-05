@@ -5,16 +5,12 @@ import App from '../components/App';
 
 // Hot module replacement logic to accept updates from webpack-dev-server
 if (process.env.NODE_ENV === 'development' && module.hot) {
-	module.hot.accept();
-	// when using redux
-	//   module.hot.accept('../reducers', () => {
-	//     store.replaceReducer(require('../reducers').default);
-	//   });
+  module.hot.accept();
 }
 
 ReactDOM.render(
-	<BrowserRouter>
-		<App />
-	</BrowserRouter>,
-	document.getElementById('root'),
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById('root'),
 );

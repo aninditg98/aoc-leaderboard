@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
 import helmet from 'helmet';
-import api from './api';
+import api from './routes';
 
 const app = express();
 // Set various headers for protection

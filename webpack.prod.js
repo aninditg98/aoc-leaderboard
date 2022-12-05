@@ -13,7 +13,7 @@ module.exports = merge(common, {
 		}),
 		new HtmlWebpackPlugin({
 			filename: 'generated.html',
-			title: '[APP NAME]',
+			title: 'AOC Leaderboard',
 			meta: [
 				// viewport meta tag for responsiveness / media queries
 				{

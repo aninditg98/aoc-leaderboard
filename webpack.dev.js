@@ -7,7 +7,7 @@ module.exports = merge(common, {
 	devtool: 'inline-source-map',
 	plugins: [
 		new HtmlWebpackPlugin({
-			title: '[APP NAME]',
+			title: 'AOC Leaderboard',
 			meta: [
 				// viewport meta tag for responsiveness / media queries
 				{
