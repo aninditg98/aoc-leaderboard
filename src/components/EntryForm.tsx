@@ -68,7 +68,6 @@ function EntryForm() {
           padding: 10,
           borderStyle: 'solid',
           borderColor: 'black',
-          width: 430,
           textAlign: 'center',
         }}
       >
