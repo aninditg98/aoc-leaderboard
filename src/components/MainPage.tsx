@@ -3,7 +3,7 @@ import axios from 'axios';
 import _ from 'lodash';
 
 const getBackgroundFromRank = (rank: number | undefined) => {
-  if (_.isNil(rank)) return '#ff2800';
+  if (_.isNil(rank)) return '#ffa07a';
   if (rank > 2) return '#00ff00';
   if (rank === 0) return '#ffcc00';
   if (rank === 1) return '#d3d3d3';
