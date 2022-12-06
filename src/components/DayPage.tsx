@@ -64,8 +64,7 @@ const DayPage: React.FunctionComponent = () => {
               <tr>
                 <th style={{ borderStyle: 'solid', borderWidth: 1, borderColor: 'black', padding: 5 }}>Rank</th>
                 <th style={{ borderStyle: 'solid', borderWidth: 1, borderColor: 'black', padding: 5 }}>Email</th>
-                <th style={{ borderStyle: 'solid', borderWidth: 1, borderColor: 'black', padding: 5 }}>Mins</th>
-                <th style={{ borderStyle: 'solid', borderWidth: 1, borderColor: 'black', padding: 5 }}>Seconds</th>
+                <th style={{ borderStyle: 'solid', borderWidth: 1, borderColor: 'black', padding: 5 }}>Time</th>
                 <th style={{ borderStyle: 'solid', borderWidth: 1, borderColor: 'black', padding: 5 }}>Score</th>
               </tr>
             </thead>
@@ -103,18 +102,7 @@ const DayPage: React.FunctionComponent = () => {
                       padding: 3,
                     }}
                   >
-                    {r.time?.minutes}
-                  </td>
-                  <td
-                    style={{
-                      borderStyle: 'solid',
-                      borderWidth: 1,
-                      borderColor: 'black',
-                      backgroundColor: getBackgroundFromRank(r.rank),
-                      padding: 3,
-                    }}
-                  >
-                    {r.time?.seconds}
+                    {r.time ? `${r.time.minutes}:${r.time.minutes}` : undefined}
                   </td>
                   <td
                     style={{
