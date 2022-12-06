@@ -102,7 +102,9 @@ const DayPage: React.FunctionComponent = () => {
                       padding: 3,
                     }}
                   >
-                    {r.time ? `${r.time.minutes}:${r.time.minutes}` : undefined}
+                    {r.time
+                      ? `${String(r.time.minutes).padStart(2, '0')}:${String(r.time.seconds).padStart(2, '0')}`
+                      : undefined}
                   </td>
                   <td
                     style={{
