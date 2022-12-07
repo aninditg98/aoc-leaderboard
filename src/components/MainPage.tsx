@@ -42,6 +42,7 @@ const MainPage: React.FunctionComponent = () => {
           borderStyle: 'solid',
           borderColor: 'black',
           textAlign: 'center',
+          overflow-x: 'scroll',
         }}
       >
         <b style={{ fontSize: 30 }}>
