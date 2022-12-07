@@ -8,7 +8,6 @@ const pool = new Pool(config);
 
 const apiRouter = express.Router();
 
-// server healthcheck route
 apiRouter.post('/submit_data', async (req, res: express.Response) => {
   try {
     const { day, minutes, seconds, email } = req.body;
