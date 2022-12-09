@@ -12,8 +12,10 @@ const getBackgroundFromRank = (rank: number | undefined) => {
 };
 
 const thRankClassNames = 'sticky left-0 max-w-[50px] min-w-[50px] w-[50px]';
-const thEmailClassNames = 'sticky left-[50px] max-w-[170px] min-w-[170px] w-[170px]';
-const thScoreClassNames = 'sticky left-[220px] max-w-[140px] min-w-[140px] w-[140px]';
+const thEmailClassNames =
+  'sticky left-[50px] max-w-[80px] min-w-[80px] w-[80px] sm:max-w-[170px] sm:min-w-[170px] sm:w-[170px]';
+const thScoreClassNames =
+  'sticky left-[130px] sm:left-[220px] max-w-[60px] min-w-[60px] w-[60px] sm:max-w-[140px] sm:min-w-[140px] sm:w-[140px]';
 const cellClassNames = 'border border-black px-3 py-3 text-center tracking-wider whitespace overflow-x-auto';
 const thClassNames = 'text-xs font-bold bg-gray-200 text-gray-500';
 
@@ -78,7 +80,7 @@ const MainPage: React.FunctionComponent = () => {
               const rankBg = getBackgroundFromRank(i);
               return (
                 <tr key={`row-${i}`}>
-                  <td className={classNames(thRankClassNames, cellClassNames, `bg-[${rankBg}`)}>{i + 1}</td>
+                  <td className={classNames(thRankClassNames, cellClassNames, `bg-[${rankBg}]`)}>{i + 1}</td>
                   <td className={classNames(thEmailClassNames, cellClassNames, `bg-[${rankBg}]`)}>{r.email}</td>
                   <td className={classNames(thScoreClassNames, cellClassNames, `bg-[${rankBg}]`)}>{r.totalScore}</td>
                   {_.range(days).map(j => {
