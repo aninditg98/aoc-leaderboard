@@ -1,6 +1,6 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm run check-types
+# npm run check-types
 npx lint-staged
 npm run build
