@@ -1,25 +1,30 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router';
 
-const startingDate = new Date();
-startingDate.setUTCFullYear(2022);
-startingDate.setUTCMonth(11);
-startingDate.setUTCDate(1);
-startingDate.setUTCHours(5);
-startingDate.setMinutes(0);
-startingDate.setSeconds(0);
+function getStartingDate(year: number) {
+  const startingDate = new Date();
+  startingDate.setUTCFullYear(year);
+  startingDate.setUTCMonth(11);
+  startingDate.setUTCDate(1);
+  startingDate.setUTCHours(5);
+  startingDate.setMinutes(0);
+  startingDate.setSeconds(0);
+  return startingDate;
+}
 
 const MS_IN_DAY = 24 * 60 * 60 * 1000;
 
 function EntryForm() {
+  const { year } = useParams<{ year: string }>();
   const [email, setEmail] = useState<string>('');
   const [emails, setEmails] = useState<string[]>();
   const curDay = useMemo(() => {
     const now = Date.now();
-    const msElapsed = now - startingDate.getTime();
+    const msElapsed = now - getStartingDate(+year).getTime();
     return Math.floor(msElapsed / MS_IN_DAY + 1);
   }, []);
-  const [day, setDay] = useState<number>(curDay);
+  const [day, setDay] = useState<number>(Math.min(curDay, 25));
   const [minutes, setMinutes] = useState<number>();
   const [seconds, setSeconds] = useState<number>();
   const [errorMsg, setErrorMsg] = useState<string>();
@@ -48,7 +53,7 @@ function EntryForm() {
     }
     try {
       setLoading(true);
-      await axios.post('/api/submit_data', { email, day, minutes, seconds });
+      await axios.post('/api/submit_data', { email, day, minutes, seconds, year });
       setLoading(false);
       setErrorMsg('Success!');
     } catch (e) {

@@ -11,7 +11,7 @@ const getBackgroundFromRank = (rank: number | undefined) => {
   if (rank === 2) return '#cc7722';
 };
 const DayPage: React.FunctionComponent = () => {
-  const params = useParams<{ day: string }>();
+  const params = useParams<{ day: string; year: string }>();
   const [errorMsg, setErrorMsg] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<
@@ -26,7 +26,7 @@ const DayPage: React.FunctionComponent = () => {
     const fetch = async () => {
       setLoading(true);
       try {
-        const result = await axios.get(`/api/get_day/${params.day}`);
+        const result = await axios.get(`/api/get_day/${params.year}/${params.day}`);
         setData(result.data.data);
         setLoading(false);
       } catch (e) {

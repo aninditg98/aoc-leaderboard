@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import _ from 'lodash';
+import { useParams } from 'react-router';
 
 const getBackgroundFromRank = (rank: number | undefined) => {
   if (_.isNil(rank)) return '#ffa07a';
@@ -15,11 +16,13 @@ const MainPage: React.FunctionComponent = () => {
   const [data, setData] =
     useState<{ email: string; totalScore: number; dailyScores: number[]; dailyRanks: (number | undefined)[] }[]>();
   const [days, setDays] = useState(0);
+  const { year } = useParams<{ year: string }>();
+
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
       try {
-        const result = await axios.get('/api/get_all_data');
+        const result = await axios.get(`/api/get_all_data/${year}`);
         setData(result.data.data);
         setDays(result.data.days);
         setLoading(false);
@@ -48,7 +51,7 @@ const MainPage: React.FunctionComponent = () => {
         <b style={{ fontSize: 30 }}>
           <u>Advent of Code Leaderboard</u>
         </b>
-        <a href="/entry_form" style={{ fontSize: 20, color: 'blue', marginTop: 10 }}>
+        <a href={`/entry_form/${year}`} style={{ fontSize: 20, color: 'blue', marginTop: 10 }}>
           Entry Form
         </a>
         {data && (
@@ -60,12 +63,12 @@ const MainPage: React.FunctionComponent = () => {
                 <th style={{ borderStyle: 'solid', borderWidth: 1, borderColor: 'black', padding: 5 }}>Rank</th>
                 <th style={{ borderStyle: 'solid', borderWidth: 1, borderColor: 'black', padding: 5 }}>Email</th>
                 <th style={{ borderStyle: 'solid', borderWidth: 1, borderColor: 'black', padding: 5 }}>Total Score</th>
-                {_.range(days).map(i => (
+                {_.range(days - 1, -1, -1).map(i => (
                   <th
                     style={{ borderStyle: 'solid', borderWidth: 1, borderColor: 'black', padding: 5 }}
                     key={`header-${i}`}
                   >
-                    <a href={`/day/${i + 1}`} style={{ fontSize: 20, color: 'blue', marginTop: 10 }}>
+                    <a href={`/day/${year}/${i + 1}`} style={{ fontSize: 20, color: 'blue', marginTop: 10 }}>
                       Day {i + 1}
                     </a>
                   </th>
@@ -108,7 +111,7 @@ const MainPage: React.FunctionComponent = () => {
                   >
                     {r.totalScore}
                   </td>
-                  {_.range(days).map(j => (
+                  {_.range(days - 1, -1, -1).map(j => (
                     <td
                       key={`body-${j}`}
                       style={{
@@ -140,6 +143,23 @@ const MainPage: React.FunctionComponent = () => {
             {errorMsg}
           </div>
         )}
+        <div style={{ marginTop: 10 }}>
+          {['2022', '2023'].map(y => (
+            <a
+              key={`${y}-link`}
+              href={`/home/${y}`}
+              style={{
+                fontSize: 20,
+                color: y === year ? 'white' : 'blue',
+                marginTop: 10,
+                backgroundColor: y === year ? 'blue' : undefined,
+                marginLeft: 10,
+              }}
+            >
+              {y}
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   );
