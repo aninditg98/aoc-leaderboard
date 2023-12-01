@@ -25,11 +25,12 @@ const MainPage: React.FunctionComponent = () => {
   const [data, setData] =
     useState<{ email: string; totalScore: number; dailyScores: number[]; dailyRanks: (number | undefined)[] }[]>();
   const [days, setDays] = useState(0);
+  const [year, setYear] = useState(2023);
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
       try {
-        const result = await axios.get('/api/get_all_data');
+        const result = await axios.get(`/api/get_all_data/${year}`);
         setData(result.data.data);
         setDays(result.data.days);
         setLoading(false);
@@ -67,7 +68,7 @@ const MainPage: React.FunctionComponent = () => {
                   className={classNames(cellClassNames, thClassNames, 'max-w-[60px]')}
                   key={`header-${i}`}
                 >
-                  <a className="flex" href={`/day/${i + 1}`}>
+                  <a className="flex" href={`/day/${year}/${i + 1}`}>
                     D<span className="hidden sm:block">ay </span>
                     {i + 1}
                   </a>

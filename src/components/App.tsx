@@ -9,7 +9,7 @@ const App: React.FunctionComponent = () => {
     <Switch>
       <Route exact path="/" component={MainPage} />
       <Route exact path="/entry_form/" component={EntryForm} />
-      <Route exact path="/day/:day" component={DayPage} />
+      <Route exact path="/day/:year/:day" component={DayPage} />
       <Redirect to="/" />
     </Switch>
   );

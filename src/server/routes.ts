@@ -1,6 +1,4 @@
 import express from 'express';
-import { Database } from 'sqlite3';
-import fs from 'fs';
 import { Pool } from 'pg';
 import { config } from './dbconfig';
 import _ from 'lodash';
@@ -55,9 +53,9 @@ function sortForDay(data: Record<string, ({ minutes: number; seconds: number } |
   return dayData;
 }
 
-apiRouter.get('/get_all_data', async (req, res: express.Response) => {
+apiRouter.get('/get_all_data/:year', async (req, res: express.Response) => {
   try {
-    const result = await pool.query(`select * from entries order by created_at`);
+    const result = await pool.query(`select * from entries where year = ${req.params.year} order by created_at`);
     let maxDay = 0;
     const data: Record<string, ({ minutes: number; seconds: number } | undefined)[]> = {};
     for (const line of result.rows) {
@@ -96,10 +94,12 @@ apiRouter.get('/get_all_data', async (req, res: express.Response) => {
   }
 });
 
-apiRouter.get('/get_day/:day', async (req, res: express.Response) => {
+apiRouter.get('/get_day/:year/:day', async (req, res: express.Response) => {
   try {
     const day = parseInt(req.params.day, 10);
-    const result = await pool.query(`select * from entries order by created_at`);
+    const result = await pool.query(
+      `select * from entries where year = ${req.params.year} and day = ${day} order by created_at`,
+    );
     const data: Record<string, ({ minutes: number; seconds: number } | undefined)[]> = {};
     for (const line of result.rows) {
       data[line.email] = data[line.email] || [];
