@@ -54,6 +54,9 @@ const MainPage: React.FunctionComponent = () => {
         <a href={`/entry_form/${year}`} style={{ fontSize: 20, color: 'blue', marginTop: 10 }}>
           Entry Form
         </a>
+        <div style={{ fontSize: 20, color: 'black', marginTop: 10 }}>
+          Score = 50 * 0.8<sup>2</sup>
+        </div>
         {data && (
           <table
             style={{ marginTop: 10, borderStyle: 'solid', borderWidth: 2, borderColor: 'black', borderSpacing: 0 }}
