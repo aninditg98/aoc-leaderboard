@@ -7,10 +7,10 @@ import DayPage from './DayPage';
 const App: React.FunctionComponent = () => {
   return (
     <Switch>
-      <Route exact path="/" component={MainPage} />
-      <Route exact path="/entry_form/" component={EntryForm} />
+      <Route exact path="/home/:year" component={MainPage} />
+      <Route exact path="/entry_form/:year" component={EntryForm} />
       <Route exact path="/day/:year/:day" component={DayPage} />
-      <Redirect to="/" />
+      <Redirect to="/home/2023" />
     </Switch>
   );
 };

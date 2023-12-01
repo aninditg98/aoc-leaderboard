@@ -8,9 +8,9 @@ const apiRouter = express.Router();
 
 apiRouter.post('/submit_data', async (req, res: express.Response) => {
   try {
-    const { day, minutes, seconds, email } = req.body;
+    const { day, minutes, seconds, email, year } = req.body;
     await pool.query(
-      `INSERT into entries(email, day, minutes, seconds) values('${email}', ${day}, ${minutes}, ${seconds})`,
+      `INSERT into entries(email, day, minutes, seconds, year) values('${email}', ${day}, ${minutes}, ${seconds}, ${year})`,
     );
     res.sendStatus(200);
   } catch (e) {
@@ -29,6 +29,9 @@ apiRouter.get('/get_emails', async (req, res: express.Response) => {
   }
 });
 
+function getScore(rank: number) {
+  return Math.ceil(50 * 0.8 ** rank);
+}
 function sortForDay(data: Record<string, ({ minutes: number; seconds: number } | undefined)[]>, day: number) {
   const dayData: {
     email: string;
@@ -43,7 +46,7 @@ function sortForDay(data: Record<string, ({ minutes: number; seconds: number } |
   });
   dayData.forEach((d, i) => {
     if (d.time) {
-      d.score = dayData.length - i - 1;
+      d.score = getScore(i);
       d.rank = i;
     } else {
       d.score = 0;
