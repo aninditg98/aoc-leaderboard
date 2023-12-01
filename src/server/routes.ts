@@ -1,5 +1,4 @@
 import express from 'express';
-import { Database } from 'sqlite3';
 import fs from 'fs';
 import { Pool } from 'pg';
 import { config } from './dbconfig';
@@ -31,6 +30,9 @@ apiRouter.get('/get_emails', async (req, res: express.Response) => {
   }
 });
 
+function getScore(rank: number) {
+  return Math.ceil(50 * 0.8 ** rank);
+}
 function sortForDay(data: Record<string, ({ minutes: number; seconds: number } | undefined)[]>, day: number) {
   const dayData: {
     email: string;
@@ -45,7 +47,7 @@ function sortForDay(data: Record<string, ({ minutes: number; seconds: number } |
   });
   dayData.forEach((d, i) => {
     if (d.time) {
-      d.score = dayData.length - i - 1;
+      d.score = getScore(i);
       d.rank = i;
     } else {
       d.score = 0;
