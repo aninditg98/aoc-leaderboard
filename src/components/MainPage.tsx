@@ -55,7 +55,7 @@ const MainPage: React.FunctionComponent = () => {
           Entry Form
         </a>
         <div style={{ fontSize: 20, color: 'black', marginTop: 10 }}>
-          Score = 50 * 0.8<sup>2</sup>
+          Score = 50 * 0.8<sup>rank</sup>
         </div>
         {data && (
           <table
