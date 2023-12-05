@@ -19,5 +19,3 @@ const App: React.FunctionComponent = () => {
 };
 
 export default hot(module)(App);
-// <Route exact path="/general_classification/:year" component={GeneralClassification} />
-// have to add this somehow idk
