@@ -6,15 +6,22 @@ import { useParams } from 'react-router';
 const getBackgroundFromRank = (rank: number | undefined) => {
   if (_.isNil(rank)) return '#ffa07a';
   if (rank > 2) return '#00ff00';
-  if (rank === 0) return '#ffcc00';
+  if (rank === 0) return '#FFFF00';
   if (rank === 1) return '#d3d3d3';
   if (rank === 2) return '#cc7722';
 };
-const MainPage: React.FunctionComponent = () => {
+
+const GeneralClassification: React.FunctionComponent = () => {
   const [errorMsg, setErrorMsg] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
-  const [data, setData] =
-    useState<{ email: string; totalScore: number; dailyScores: number[]; dailyRanks: (number | undefined)[] }[]>();
+  const [data, setData] = useState<
+    {
+      email: string;
+      daysCompleted: number;
+      totalTime: { minutes: number; seconds: number } | undefined;
+      dailyTimes: { minutes: number; seconds: number } | undefined[];
+    }[]
+  >();
   const [days, setDays] = useState(0);
   const { year } = useParams<{ year: string }>();
 
@@ -22,7 +29,7 @@ const MainPage: React.FunctionComponent = () => {
     const fetch = async () => {
       setLoading(true);
       try {
-        const result = await axios.get(`/api/get_all_data/${year}`);
+        const result = await axios.get(`/api/get_all_time_data/${year}`);
         setData(result.data.data);
         setDays(result.data.days);
         setLoading(false);
@@ -32,7 +39,8 @@ const MainPage: React.FunctionComponent = () => {
       }
     };
     fetch();
-  }, []);
+  }, [year]);
+
   return (
     <div style={{ display: 'flex', justifyContent: 'center', fontFamily: 'Andale Mono', overflowX: 'auto' }}>
       <div
@@ -49,18 +57,15 @@ const MainPage: React.FunctionComponent = () => {
         }}
       >
         <b style={{ fontSize: 30 }}>
-          <u>Advent of Code Leaderboard</u>
+          <u>General Classification</u>
         </b>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
           <a href={`/entry_form/${year}`} style={{ fontSize: 20, color: 'blue', marginRight: 10 }}>
             Entry Form
           </a>
-          <a href={`/general_classification/${year}`} style={{ fontSize: 20, color: 'blue' }}>
-            General Classification
+          <a href={`/home/${year}`} style={{ fontSize: 20, color: 'blue' }}>
+            Points Classification
           </a>
-        </div>
-        <div style={{ fontSize: 20, color: 'black', marginTop: 10 }}>
-          Score = 50 * 0.8<sup>rank</sup>
         </div>
         {data && (
           <table
@@ -70,7 +75,10 @@ const MainPage: React.FunctionComponent = () => {
               <tr>
                 <th style={{ borderStyle: 'solid', borderWidth: 1, borderColor: 'black', padding: 5 }}>Rank</th>
                 <th style={{ borderStyle: 'solid', borderWidth: 1, borderColor: 'black', padding: 5 }}>Email</th>
-                <th style={{ borderStyle: 'solid', borderWidth: 1, borderColor: 'black', padding: 5 }}>Total Score</th>
+                <th style={{ borderStyle: 'solid', borderWidth: 1, borderColor: 'black', padding: 5 }}>
+                  Days Completed
+                </th>
+                <th style={{ borderStyle: 'solid', borderWidth: 1, borderColor: 'black', padding: 5 }}>Total Time</th>
                 {_.range(days - 1, -1, -1).map(i => (
                   <th
                     style={{ borderStyle: 'solid', borderWidth: 1, borderColor: 'black', padding: 5 }}
@@ -85,7 +93,7 @@ const MainPage: React.FunctionComponent = () => {
             </thead>
             <tbody style={{ fontSize: 16 }}>
               {data.map((r, i) => (
-                <tr key={`row-{i}`}>
+                <tr key={`row-${i}`}>
                   <td
                     style={{
                       borderStyle: 'solid',
@@ -117,7 +125,25 @@ const MainPage: React.FunctionComponent = () => {
                       padding: 3,
                     }}
                   >
-                    {r.totalScore}
+                    {r.daysCompleted}
+                  </td>
+                  <td
+                    style={{
+                      borderStyle: 'solid',
+                      borderWidth: 1,
+                      borderColor: 'black',
+                      backgroundColor: getBackgroundFromRank(i),
+                      padding: 3,
+                    }}
+                  >
+                    {r.totalTime && (
+                      <>
+                        {r.totalTime.minutes >= 60
+                          ? `${Math.floor(r.totalTime.minutes / 60)}h ${r.totalTime.minutes % 60}m`
+                          : `${r.totalTime.minutes}m`}
+                        :{String(r.totalTime.seconds).padStart(2, '0')}
+                      </>
+                    )}
                   </td>
                   {_.range(days - 1, -1, -1).map(j => (
                     <td
@@ -130,7 +156,8 @@ const MainPage: React.FunctionComponent = () => {
                         padding: 3,
                       }}
                     >
-                      {r.dailyScores[j]}
+                      {r.dailyTimes[j] &&
+                        `${r.dailyTimes[j].minutes}:${String(r.dailyTimes[j].seconds).padStart(2, '0')}`}
                     </td>
                   ))}
                 </tr>
@@ -173,4 +200,4 @@ const MainPage: React.FunctionComponent = () => {
   );
 };
 
-export default MainPage;
+export default GeneralClassification;
