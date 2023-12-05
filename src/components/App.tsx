@@ -13,7 +13,7 @@ const App: React.FunctionComponent = () => {
       <Route exact path="/entry_form/:year" component={EntryForm} />
       <Route exact path="/general_classification/:year" component={GeneralClassification} />
       <Route exact path="/day/:year/:day" component={DayPage} />
-      <Redirect to="/general_classification/2023" />
+      <Redirect to="/home/2023" />
     </Switch>
   );
 };
